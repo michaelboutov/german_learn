@@ -52,6 +52,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               onPressed: () => launchUrl(pricingUrl),
               child: const Text("See Pricing"),
             ),
+            const SizedBox(height: 8),
+            TextButton(
+              onPressed: () => context.push('/exercise/possessive-pronouns'),
+              child: const Text("German Exercise"),
+            ),
           ],
         ),
       ),
