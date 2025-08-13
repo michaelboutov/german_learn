@@ -8,6 +8,7 @@ import 'package:devtodollars/screens/auth_screen.dart';
 import 'package:devtodollars/screens/home_screen.dart';
 import 'package:devtodollars/screens/payments_screen.dart';
 import 'package:devtodollars/services/auth_notifier.dart';
+import 'package:devtodollars/possessive_pronouns_exercise/screens/exercise_screen.dart';
 
 part 'router_notifier.g.dart';
 
@@ -86,6 +87,13 @@ GoRouter router(RouterRef ref) {
         builder: (BuildContext context, GoRouterState state) {
           final qp = state.uri.queryParameters;
           return PaymentsScreen(price: qp["price"]);
+        },
+      ),
+      GoRoute(
+        name: 'possessive_pronouns_exercise',
+        path: '/exercise/possessive-pronouns',
+        builder: (context, state) {
+          return const ExerciseScreen();
         },
       ),
     ],
