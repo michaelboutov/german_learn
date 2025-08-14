@@ -128,11 +128,18 @@ class _ExerciseScreenState extends ConsumerState<ExerciseScreen> with TickerProv
                 ),
               ),
             ),
-            Wrap(
-              spacing: 16.0,
-              runSpacing: 16.0,
-              alignment: WrapAlignment.center,
-              children: question.options.map((option) {
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16.0,
+                mainAxisSpacing: 16.0,
+                childAspectRatio: 2.5,
+              ),
+              itemCount: question.options.length,
+              itemBuilder: (context, index) {
+                final option = question.options[index];
                 Color color = Colors.grey[700]!;
                 if (state.isAnswerSubmitted) {
                   if (option == state.currentQuestion!.correct_answer) {
@@ -146,21 +153,22 @@ class _ExerciseScreenState extends ConsumerState<ExerciseScreen> with TickerProv
                   onTap: state.isAnswerSubmitted ? null : () => _onAnswerSubmitted(option, state),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
-                    width: 150,
-                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
                     decoration: BoxDecoration(
                       color: color,
                       border: Border.all(color: Colors.white, width: 2),
                       boxShadow: const [BoxShadow(color: Colors.white, offset: Offset(4, 4), blurRadius: 0)],
                     ),
-                    child: Text(
-                      option,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+                    child: Center(
+                      child: Text(
+                        option,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 );
-              }).toList(),
+              },
             ),
             if (state.isAnswerSubmitted)
               GestureDetector(
